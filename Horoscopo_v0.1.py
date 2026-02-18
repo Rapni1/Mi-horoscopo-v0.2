@@ -1,33 +1,37 @@
-#Horoscopo Python V0.1 - Mi primer proyecto en python.
+#Horoscopo Python V0.2 - Mi primer proyecto en python.
 #Autor: Rapni
 def obtener_signo(mes, dia):
-	if (mes == 3 and dia >= 21) or (mes == 4 and dia <=19):
-		return "Aries"
-	elif (mes == 4 and dia >= 20) or (mes == 5 and dia <=20):
-		return "Tauro"
-	elif (mes == 5 and dia >= 21) or (mes == 6 and dia <= 20):
-		return "Geminis"
-	elif (mes == 6 and dia >= 21) or (mes == 7 and dia <= 22):
-		return "Cancer"
-	elif (mes == 7 and dia >= 23) or (mes == 8 and dia <= 22):
-		return "Leo"
-	elif (mes == 8 and dia >= 23) or (mes == 9 and dia <= 22):
-		return "Virgo"
-	elif (mes == 9 and dia >=23) or (mes == 10 and dia <= 22):
-		return "Libra"
-	elif (mes == 10 and dia >= 23) or (mes == 11 and dia <=21):
-		return "Escorpio"
-	elif (mes == 11 and dia >= 22) or (mes == 12 and dia <= 21):
-		return "Sagitario"
-	elif (mes == 12 and dia >= 22) or (mes ==1 and dia <= 19):
-		return "Capricornio"
-	elif (mes == 1 and dia >= 20) or (mes == 2 and dia <= 18):
-		return "Acuario"
-	elif (mes == 2 and dia >= 19) or (mes == 3 and dia <= 20):
-		return "Piscis"
-	else:
-		return "Signo no valido o no encontrado"
-dia = int(input("Ingrese su dia de nacimiento (1, 31) :"))
-mes = int(input("Ingrese su mes de nacimiento (1, 12) :"))
-signo = obtener_signo(mes, dia)
-print(f'Tu signo es: {signo}')
+    datos_signos = [
+        (1, 19, "Capricornio"), (2, 18, "Acuario"), (3, 20, "Piscis"),
+        (4, 19, "Aries"), (5, 20, "Tauro"), (6, 20, "Géminis"),
+        (7, 22, "Cáncer"), (8, 22, "Leo"), (9, 22, "Virgo"),
+        (10, 22, "Libra"), (11, 21, "Escorpio"), (12, 21, "Sagitario")
+    ]
+
+    if dia <= datos_signos[mes-1][1]:
+        return datos_signos[mes-1][2]
+    else:
+        return datos_signos[mes % 12][2]
+
+print("--- PROYECTO HORÓSCOPO PYTHON V0.2 ---")
+
+while True:
+    try:
+        dia_nac = int(input("\nIngrese su día de nacimiento (1-31): "))
+        mes_nac = int(input("Ingrese su mes de nacimiento (1-12): "))
+
+        
+        if 1 <= mes_nac <= 12 and 1 <= dia_nac <= 31:
+            resultado = obtener_signo(mes_nac, dia_nac)
+            print(f"✨ Tu signo es: {resultado} ✨")
+            
+            
+            continuar = input("\n¿Quieres consultar otro? (s/n): ").lower()
+            if continuar != 's':
+                print("¡Adiós! 👋")
+                break 
+        else:
+            print("❌ Error: Fecha fuera de rango (Mes 1-12, Día 1-31).")
+
+    except ValueError:
+        print("❌ Error: Por favor, ingresa solo números enteros.")
